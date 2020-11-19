@@ -1,0 +1,207 @@
+select * from employees;
+
+-- find all the employees with department id of 60 or 100
+
+select * from employees
+where department_id = 60 or department_id = 100;
+
+-- on top of abpve query only get first name and last name and salary and job_id
+
+select first_name , last_name, salary, job_id
+from employees
+where department_id = 60 or department_id = 100;
+
+-- find out all the jobs information if the minimum salary is more than 5000 and 1000
+-- what do we do if we have range? : more than that, less than this.
+-- 2 ways to do it: 1. usig BETWEEN and AND ex: where min_salary between 5000 and 10000
+-- 2 way is where min_salary >=5000 and min_salary<=10000; 
+
+
+select * from jobs
+--where min_salary between 5500 and 10000;  or the option below:
+where min_salary >=5000 and min_salary<=10000; 
+
+-- find out all theemployees first name and phone 
+-- with department id of 60 or 100 or 90 or 80, 120
+-- if we are checking for multiple possible values for same column
+-- we can use in (value1, value2, value3)
+-- two ways to do this task:
+
+-- first way to do it using IN operatore which allows
+-- to specify multiple values in a WHERE () parathesis clause :
+select first_name , phone_number, department_id
+from employees
+where department_id in (60,100,90,80,120);
+
+-- second way of doing same task above: 
+--select first_name , phone_number, department_id
+--from employees
+--where department_id = 60 or 
+-- department_id =100 or 
+-- department_id =90
+-- department_id = 80 or
+-- department_id =120;
+
+
+
+-- I want to get all the first name that starts with letter A
+-- from employees table
+-- % is a wild card that can represent 0 or more characters
+-- for example 'A%' means --> any String that starts with letter A
+-- we use percentage sign for zero or more chars, to see if it start with that char use --> A,% 
+-- to see if it ends with particar char use --> %a
+-- we can use it to partial string match 
+-- use LIKE word instead of using '=' operator
+-- LIKE is always associated with the percentage, the wild card
+
+
+
+select first_name 
+from employees 
+where first_name like 'A%'; 
+
+
+-- I want to get all the first name that end with letter 'a'
+-- to get the last character use this way : %a, or %ad, or %k
+
+select first_name
+from employees
+where first_name like '%a'; 
+
+-- find out all the first_name from the employees where 
+-- the first char is 'A%' and last_name '%n'
+
+select first_name , last_name
+from employees
+where first_name like 'A%' and last_name like '%n';
+
+
+-- if we want to check through all the words and find if any particular chars are present
+-- we can use this example  %a%   or %n%    %d%
+-- start with anyting zero or more chars, then ends with a or starts with a.
+-- thats what the sign mean
+
+select first_name , last_name
+from employees
+where first_name like '%a%' and last_name like '%n%';
+
+select first_name
+from employees
+where first_name like '%x%';
+
+select job_id
+from employees
+where job_id like 'AD%' or job_id like '%REP';
+
+
+-- from employees table find out all job_id dosnt not end with REP
+-- use NOT LIKE to remove all the results with REP
+
+select job_id
+from employees
+where job_id not like '%REP';
+
+-- removes all the names ending with  '%a%'
+select first_name
+from employees
+where first_name not like '%a%';
+
+-- removes all the names doesnt contain a and  removes all names start with A
+-- we know that upperCase A only appears in the first character so in order
+-- to exclude the upper case A we will need to say not like 'A%'
+
+-- lowercase can show up either in the middle or 
+--at the end so in order to exclude it we need to use not like '%a%'
+-- this %A% means return anything that contains a uppercase
+
+select first_name
+from employees
+where first_name not like '%a%' and first_name not like 'A%';
+
+
+-- working with Null value
+-- if a cell has no value entered the it is null
+-- use IS NULL words
+
+-- find out the employees information if the employees manager_id is null
+
+select * from employees
+where manager_id is null;
+
+-- find out first_name and manager_id if the manager_id is NOT NULL
+select first_name , manager_is
+from employees
+where manager_id is not null;
+
+-- function in sql  -- pre-written functionality we can directly use 
+
+-- single raw function example:  affect each and every raw and it generates output.
+
+-- return all employees first name in uppercase
+-- so in the example below it first lists names as it is, and then 
+-- the opernation upper(first_name) --> makes all first-Names UPPERCASE
+-- and to lower case with the same operation 
+select first_name ,upper(first_name), lower(first_name)
+from employees;
+
+-- return all employee first_name and salary frm employee table
+-- display the resulting column name as , name , money
+-- we can give alias to the query result column name using the word AS and PUTURWORDHERE
+
+select first_name as name , salary as money
+from employees;
+
+select first_name as имя , salary as бабло
+from employees;
+
+
+
+-- I want to return first_name and last_name in one column and 
+-- name this columns as full_name
+-- the result should be 3 columns , first_name, last_name , full_name
+
+
+-- To concatenate in sql use  ||  <- this straight double slash
+select first_name , last_name, first_name || ' '|| last_name as Full_Name
+from employees;
+
+
+-- To make case-insensitive search
+-- make everything uppercase and search for uppercase word
+-- or make it all lowercase and seach for lower case word
+
+select first_name , upper(first_name)
+from employees
+where upper (first_name) not like '%a%';
+
+
+
+select first_name , upper(first_name)
+from employees
+where upper (first_name) not like '%P%' and upper (first_name) not like '%R%'
+and upper (first_name) not like '%A%' and upper (first_name) not like '%N%';
+
+-- display first 3 letters of first_name
+-- substr(value, beginIndex, endIndex)
+
+
+select first_name , substr(first_name, 1 , 3) , length (first_name)
+from employees; 
+
+
+select first_name , last_name, 
+substr(first_name ,1, 1) ||''||substr(last_name , 1, 1) 
+as Initials
+from employees;
+
+
+
+
+
+
+
+
+
+
+
+-- single raw function example:
