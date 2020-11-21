@@ -5,7 +5,15 @@ select first_name  , department_name
 from employees
 inner join departments
 on departments.department_id = employees.department_id;
+-- the restult of the above query is 106 rather than 107.
+--because one employee does not have deparment
+select * from employees
+where department_id is null;
 
+
+select e.first_name , d.department_name
+from employees e
+left outer join departments d on e.department_id = d.department_id ;
 
 -- above query just work byt adding table name in from of 
 --column name all the times ins not efficint. we can use table aliase to make this simplier
@@ -30,9 +38,37 @@ inner join departments d on d.department_id = d.department_id
 inner join countries c on c.country_id = c.country_id
 inner join regions r on r.region_id= r.region_id
 inner join locations l on l.location_id=l.location_id
-order by first_name asc;
+;
 
 
 
+-- left outer join means whoever come first, give me all the data
+-- meaning whichever table comes first to connnect will be the outer left
+-- the second table will be only the matching table, which is the right table
+
+select e.first_name , d.department_name
+from employees e
+left outer join departments d on e.department_id = d.department_id ;
 
 
+-- task get all first name and department
+-- including the employees without department
+select e.first_name , d.department_name
+from employees e  -- this is how we give the aliase
+left outer join departments d on e.department_id = d.department_id ;
+
+
+-- right outer join returns all data from right table wether ** finish this part
+-- get all first name and department 
+-- including the department but without employee
+select e.first_name , d.department_name
+from employees e
+right outer join departments d on e.department_id = d.department_id ;
+
+
+-- task get all first name and department including the department without any employee
+-- including the employee without any department
+
+select e.first_name , d.department_name
+from employees e
+full outer join departments d on e.department_id = d.department_id ;
