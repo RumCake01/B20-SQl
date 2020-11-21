@@ -1,0 +1,38 @@
+-- find out the firt name and department name from employees table
+-- and department table
+
+select first_name  , department_name
+from employees
+inner join departments
+on departments.department_id = employees.department_id;
+
+
+-- above query just work byt adding table name in from of 
+--column name all the times ins not efficint. we can use table aliase to make this simplier
+
+select e.first_name , d.department_name
+from employees e -- this is how we name aliase for table
+inner join departments d on e.department_id = d.department_id;
+
+
+--get the first_name and job_tite
+
+select e.first_name , j.job_title
+from employees e
+inner join jobs j on e.job_id = j.job_id;
+
+
+-- first_name , department_name, city, country_name, region_name
+
+select e.first_name , d.department_name, c.country_name, r.region_name
+from employees e
+inner join departments d on d.department_id = d.department_id
+inner join countries c on c.country_id = c.country_id
+inner join regions r on r.region_id= r.region_id
+inner join locations l on l.location_id=l.location_id
+order by first_name asc;
+
+
+
+
+
