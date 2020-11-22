@@ -56,5 +56,65 @@ from employees
 group by manager_id
 having count(*)<2 ;
 
+--GET THE COUNT OF EMPLOYEE THAT HAVE EXACTLY 5 CHARACTERS
+-- IN FIRST NAME (no need for group by)
+
+select count(first_name) as "Names with 5 chars"
+from employees
+where length(first_name)=5;
+
+-- group the first name by the character count in employees table
+-- char count , name_count
+
+select length (first_name) as "Length of the Name" ,
+count(*) as "Name count"
+from employees
+group by length(first_name)
+order by 1;
+
+-- find the longest name from the table:
+SELECT LENGTH( FIRST_NAME || LAST_NAME ), FIRST_NAME, LAST_NAME
+FROM EMPLOYEES
+WHERE LENGTH( FIRST_NAME || LAST_NAME ) =
+(SELECT MAX(LENGTH( FIRST_NAME || LAST_NAME )) FROM EMPLOYEES);
+
+
+-- this task is not group by task:
+-- sort the first name by characters count of first_name in employees table:
+
+select first_name 
+from employees
+order by length(first_name);
+
+
+--ordering by multiple column
+-- sort employee table by first_name
+-- if first names are the same, then order by second column,meaning by last_name
+
+
+select first_name , last_name
+from employees
+order by first_name asc , last_name asc;
+-- the solution above will only sort by the first name, not both
+
+
+--- Relational Database:
+-- consistst of tables that related to each other
+
+-- each and every table has a unique identifier column
+-- known as a Primary key.
+-- this column can not be null and it cant have duplicate value
+
+
+-- Constraint - means rules for column
+
+
+
+-- get employee name with their department_id name
+
+
+-- inner join - whatever is matchingfrom left side and right side of two tables.
+
+
 
 

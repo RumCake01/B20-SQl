@@ -1,0 +1,77 @@
+-- final hour practice
+-- combine what we learned:
+
+
+
+
+-- get the employee count of each department 
+-- the result should include 2 coluns:
+--department_name, employees_count
+-- coma means it is separation between columns
+
+select d.department_name , COUNT (e.first_name) as employee_count 
+from employees e
+inner join departments d on e.department_id = d.department_id
+group by d.department_name
+order by 2; -- must always be the last line
+
+
+-- on top of above query
+-- only list the department names starting with A or end ending with ng
+select d.department_name , COUNT (e.first_name) as employee_count 
+from employees e
+inner join departments d on e.department_id = d.department_id
+group by d.department_name
+having d.department_name like 'A%' or d.department_name like '%ng';
+
+-- if you are using count(*) for condition you can only use it with having 
+-- if your condition does not involve aggregare you can filter directly with where
+
+-- where clause does not work aggeregate function: 
+-- but this one below will work becayse we dont use count(*) for condition part
+-- we can direcrly filer out the result first
+-- then do the grouping
+
+select d.department_name , COUNT (e.first_name) as employee_count 
+from employees e
+inner join departments d on e.department_id = d.department_id
+where d.department_name like 'A%' or d.department_name like '%ng'
+group by d.department_name;
+
+
+-- by extending above query, return the department name with more than 5 employees
+
+select d.department_name , COUNT (e.first_name) as employee_count 
+from employees e
+inner join departments d on e.department_id = d.department_id
+where d.department_name like 'A%' or d.department_name like '%ng'
+group by d.department_name
+having count(*) > 5;
+
+
+-- how many departments in each country:
+-- countries -<coutry_id>- Location -<Location_Id>- Department
+
+select c.country_name , count (d.department_name)
+from departments d
+outer join locations l on d.location_id =d.location_id
+inner JOIN countries c on c.country_id = c.country_id
+group by c.country_name;
+
+
+select c.country_name , count (d.department_name)
+from departments d
+right  join locations l on d.location_id =l.location_id
+right JOIN countries c on l.country_id = c.country_id
+
+group by c.country_name
+order by 2;
+
+
+
+
+
+
+
+
+

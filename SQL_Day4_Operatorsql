@@ -1,0 +1,59 @@
+-- set Operators:
+-- Union All, Union, Minus, Intersect 
+
+CREATE TABLE FIRST_TABLE AS (
+    SELECT FIRST_NAME , SALARY FROM EMPLOYEES 
+    WHERE SALARY BETWEEN 10500 AND 13000
+    
+) ORDER BY 2 ;  
+
+
+CREATE TABLE SECOND_TABLE AS (
+    SELECT FIRST_NAME , SALARY FROM EMPLOYEES 
+    WHERE SALARY BETWEEN 12000 AND 24000
+    
+) ORDER BY 2 ;  
+
+COMMIT ;
+
+select * from first_table;
+select * from second_table;
+
+
+-- minus
+-- list1: apple, egg, milk, pineapple, bread
+-- list2: milk, bread, oil, walnut
+
+-- union all --> apple, egg, milk, pineapple, bread, milk, bread, oil, walnut 
+-- union --> apple, bread, egg, milk, pineapple, oil, walnuts
+
+-- list1 minus list 2
+-- list 2 here is a no-no list, as long as it shows up in the first one, dont buy it.
+-- this means find a match then remove it.
+
+-- minus --> apple, egg,  pineapple 
+
+-- list2: milk, bread, oil, walnut
+-- list 1:  here is a no-no list
+
+-- minus -->  oil, walnut
+
+
+
+-- Intersect 
+
+-- list 1 intersect list2 --> returnc common part of both lists
+-- only milk and bread is common. 
+
+select * from first_table 
+minus
+select * from second_table;
+
+
+select * from second_table 
+minus
+select * from first_table ;
+
+
+
+
