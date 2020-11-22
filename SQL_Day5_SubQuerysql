@@ -1,0 +1,61 @@
+-- find out the highest earner first_name im employees table
+
+select max(salary) from employees;
+
+select first_name from employees where salary = 24000;
+
+
+-- in this below example we did grouping and just copy/pasted the existing query.
+SELECT FIRST_NAME FROM employees
+WHERE SALARY = ( select max(salary) from employees );
+
+
+-- find out the min salary guy:
+
+SELECT FIRST_NAME , LAST_NAME FROM employees
+WHERE SALARY = ( select min(salary) from employees );
+
+SELECT FIRST_NAME , LAST_NAME , salary FROM employees
+WHERE SALARY > ( select avg(salary) from employees )
+order by 3 desc
+;
+
+
+-- find the second max salary:
+select max(salary) from employees where salary != (select max(salary) from employees)
+;
+-- find out the name of above person with the
+-- second high salary using multiple query in one query
+
+select first_name from employees where salary = 
+                    (select max(salary) from employees where salary 
+                    != (select max(salary) from employees));
+
+-- how to return max and min salary in one column
+-- the column name should be result, it should have 2 rows
+
+select max(salary) as result from employees
+union
+select min(salary) as result from employees;
+
+
+-- find out the name of people who make  max and min salary:
+
+SELECT FIRST_NAME, SALARY
+FROM EMPLOYEES
+WHERE SALARY IN(SELECT MAX(SALARY) AS RESULT FROM EMPLOYEES
+                UNION
+                SELECT MIN(SALARY) AS RESULT FROM EMPLOYEES);
+                
+                -- the same thing without using Union
+                
+select first_name , salary from employees
+where salary in ((select max(salary) as result from employees),
+-- we use in here instead of "=" because one salary can not be equal to another
+
+(select min(salary) as result from employees ));
+
+
+
+
+
