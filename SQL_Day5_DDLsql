@@ -1,0 +1,98 @@
+
+-- Create DDL 
+-- Superheros
+-- hero_id
+-- name_as Varchar String
+-- Power as Varchar String
+-- CostumeColor as a Varchar String
+-- company_ID as Varchar String
+
+
+SELECT * FROM SUPER_HEROS_2;
+
+INSERT INTO super_heros_2 (hero_id,name, power,costume_color,company_name)
+                VALUES (103,  'Hulk','Anger','Green','Marvel');
+
+INSERT INTO super_heros_2 (hero_id,name, power,costume_color,company_name)
+                VALUES (104,  'Batman','Intelligence','Black','DC');
+INSERT INTO super_heros_2 (hero_id,name, power,costume_color,company_name)
+                VALUES (105,  'CapitanMarvel','Fly','Gold','Marvel');
+INSERT INTO super_heros_2 (hero_id,name, power,costume_color,company_name)
+                VALUES (106,  'Miss Marvel','Fly','Gold','Marvel');
+INSERT INTO super_heros_2 (hero_id,name, power,costume_color,company_name)
+                VALUES (107,  'Joker','bad joke','purple','DC');
+INSERT INTO super_heros_2 (hero_id,name, power,costume_color,company_name)
+                VALUES (108,  'Flash','Fastr','Red, Gold','DC');
+                
+
+-- to do the update to certain items in the table
+
+UPDATE super_heros_2
+SET
+    POWER = 'super size'
+WHERE
+        name ='Hulk';
+
+
+-- deleting data 
+
+
+DELETE FROM super_heros_2
+WHERE name ='Joker';
+
+-- Crud operation: created – read – update – delete 
+
+
+
+UPDATE super_heros_2
+SET
+    POWER = 'SUPER STRONG'
+WHERE
+        name = 'Iron_Man';
+
+
+---- COMIC COMPANY TABLE:
+
+select * from comic_company;
+-- to make connection between two tables we can use foreign key constraint i coiuldnt connect these two.
+
+
+​
+-- SUPERHEROS COMPANY COLUMN IS FOREIGN KEY THAT COMING FROM COMIC_COMAPNY TABLE
+​
+​
+CREATE TABLE SUPER_HEROS 
+(
+  HERO_ID NUMBER NOT NULL 
+, NAME VARCHAR2(20 BYTE) NOT NULL 
+, POWER VARCHAR2(40 BYTE) 
+, COSTUM_COLOR VARCHAR2(20 BYTE) 
+, COMPANY VARCHAR2(20 BYTE) 
+, CONSTRAINT SUPER_HEROS_PK 
+            PRIMARY KEY (HERO_ID )
+, CONSTRAINT SUPER_HEROS_UK1 
+            UNIQUE (NAME )
+, CONSTRAINT SUPER_HEROS_FK1 
+            FOREIGN KEY(COMPANY )REFERENCES COMIC_COMPANY( COMPANY )
+, CONSTRAINT SUPER_HEROS_CHK1 
+            CHECK (LENGTH( COSTUM_COLOR) > 2)
+) ;
+​
+Insert into SUPER_HEROS (HERO_ID,NAME,POWER,COSTUM_COLOR,COMPANY) values (100,'SUPERMAN','FLY, LASER EYE','RED and Blue','DC');
+Insert into SUPER_HEROS (HERO_ID,NAME,POWER,COSTUM_COLOR,COMPANY) values (101,'WONDER WOMAN','SUPER STRENGTH','RED','DC');
+Insert into SUPER_HEROS (HERO_ID,NAME,POWER,COSTUM_COLOR,COMPANY) values (102,'Iron Man','Tech','Red Gold','Marvel');
+Insert into SUPER_HEROS (HERO_ID,NAME,POWER,COSTUM_COLOR,COMPANY) values (103,'Hulk','SUPER SIZE','Green','Marvel');
+Insert into SUPER_HEROS (HERO_ID,NAME,POWER,COSTUM_COLOR,COMPANY) values (104,'Batman','Intelligence','Black','DC');
+Insert into SUPER_HEROS (HERO_ID,NAME,POWER,COSTUM_COLOR,COMPANY) values (105,'Capitan Marvel','photon energy managemnt','Golden','Marvel');
+Insert into SUPER_HEROS (HERO_ID,NAME,POWER,COSTUM_COLOR,COMPANY) values (106,'Miss Marvel','Elasiticity','Red yellow','Marvel');
+Insert into SUPER_HEROS (HERO_ID,NAME,POWER,COSTUM_COLOR,COMPANY) values (108,'FLASH','FAST@@','RED, GOLD','DC');
+​
+COMMIT ; 
+​
+SELECT * FROM SUPER_HEROS;
+
+
+-- this above is just for practice, I do not need to dig into that!!!
+
+
+
