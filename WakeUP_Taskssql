@@ -1,0 +1,10 @@
+-- Find out the name of top earner in each departments in HR Database
+ select e.FIRST_NAME, d.DEPARTMENT_NAME, E.SALARY
+from EMPLOYEES e
+inner join DEPARTMENTS D
+                    on e.DEPARTMENT_ID = d.DEPARTMENT_ID
+where salary in (select max (SALARY) from EMPLOYEES e
+inner join DEPARTMENTS d on e.DEPARTMENT_ID = d.DEPARTMENT_ID
+group by d.DEPARTMENT_NAME)
+-- we can order it by a certain column:
+order by 1;
